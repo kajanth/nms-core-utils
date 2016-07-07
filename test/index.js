@@ -3,7 +3,6 @@
 const assert = require('assert');
 const utils = require('../index.js');
 
-
 describe('forIn', () => {
 
 	it('loop forIn', (done) => {
@@ -50,6 +49,26 @@ describe('forIn', () => {
 		});
 
 		assert.equal(counter, 0);
+		done();
+	});
+
+});
+
+describe('isDir', () => {
+
+	it('test is dir', (done) => {
+
+		const dir = '../';
+
+		assert.equal(utils.isDir(dir), true);
+		done();
+	});
+
+	it('.gitignore isn\'t dir', (done) => {
+
+		const dir = '../.gitignore';
+
+		assert.equal(utils.isDir(dir), false);
 		done();
 	});
 

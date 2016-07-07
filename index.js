@@ -22,5 +22,29 @@ utils.forIn = (obj, callback) => {
 	return true;
 };
 
+/**
+ * @function getStats
+ * @param {string} path - the path
+ * @returns {Object} stats
+ */
+utils.getStats = (path) => {
+	return fs.statSync(path);
+};
+
+/**
+ * @function isDir
+ * @param {string} path - the path
+ * @returns {boolean} is directory
+ */
+utils.isDir = (path) => {
+
+	try {
+		return utils.getStats(path).isDirectory();
+	} catch (err) {
+		return false;
+	}
+
+};
+
 
 module.exports = utils;
