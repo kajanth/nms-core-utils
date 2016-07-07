@@ -1,0 +1,33 @@
+{
+	"name": "nms-core-utils",
+	"version": "0.1.0",
+	"description": "Node mock server core utils",
+	"email": "simon.mollweide@web.de",
+	"author": "Simon Mollweide <simon.mollweide@web.de>",
+	"url": "https://github.com/smollweide/nms-core-utils",
+	"repository": {
+		"type": "github",
+		"url": "https://github.com/smollweide/nms-core-utils"
+	},
+	"bugs": {
+		"url": "https://github.com/smollweide/nms-core-utils/issues"
+	},
+	"scripts": {
+		"start": "node index.js",
+		"test": "./node_modules/mocha/bin/mocha ./test/index.js"
+	},
+	"main": "index.js",
+	"engines": {
+		"node": ">= 4.4.0"
+	},
+	"preferGlobal": false,
+	"private": true,
+	"license": "MIT",
+	"dependencies": {
+		"chip": "0.0.5",
+		"extend": "^3.0.0"
+	},
+	"devDependencies": {
+		"mocha": "^2.4.5"
+	}
+}
