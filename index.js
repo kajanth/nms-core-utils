@@ -46,5 +46,19 @@ utils.isDir = (path) => {
 
 };
 
+/**
+ * @function isFile
+ * @param {string} path - the path
+ * @returns {boolean} is directory
+ */
+utils.isFile = (path) => {
+
+	try {
+		return utils.getStats(path).isFile();
+	} catch (err) {
+		return false;
+	}
+
+};
 
 module.exports = utils;

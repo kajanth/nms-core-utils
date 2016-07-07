@@ -58,7 +58,7 @@ describe('isDir', () => {
 
 	it('test is dir', (done) => {
 
-		const dir = '../';
+		const dir = './test';
 
 		assert.equal(utils.isDir(dir), true);
 		done();
@@ -66,9 +66,29 @@ describe('isDir', () => {
 
 	it('.gitignore isn\'t dir', (done) => {
 
-		const dir = '../.gitignore';
+		const dir = './.gitignore';
 
 		assert.equal(utils.isDir(dir), false);
+		done();
+	});
+
+});
+
+describe('isFile', () => {
+
+	it('test isn\'t file', (done) => {
+
+		const dir = './test';
+
+		assert.equal(utils.isFile(dir), false);
+		done();
+	});
+
+	it('index.js is file', (done) => {
+
+		const dir = './index.js';
+
+		assert.equal(utils.isFile(dir), true);
 		done();
 	});
 
