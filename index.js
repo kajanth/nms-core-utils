@@ -1,22 +1,22 @@
 const fs = require('fs');
 const log = require('chip');
-const extend = require('extend');
 const utils = {};
 
 /**
  * @function forIn
  * @param {Object} obj - the object which should be looped
- * @param {function} callback - arguments are key and value
+ * @param {function} loopCallback - arguments are key and value
  * @returns {boolean} valid incoming variable obj
  */
-utils.forIn = (obj, callback) => {
+utils.forIn = (obj, loopCallback) => {
 
 	if (typeof obj !== 'object' || (obj instanceof Array)) {
 		return false;
 	}
 
 	Object.keys(obj).map((key) => {
-		callback(key, obj[key]);
+		loopCallback(key, obj[key]);
+		return true;
 	});
 
 	return true;
@@ -25,7 +25,7 @@ utils.forIn = (obj, callback) => {
 /**
  * @function getStats
  * @param {string} path - the path
- * @returns {Object} stats
+ * @returns {{isDirectory:function,isFile:function}} stats
  */
 utils.getStats = (path) => {
 	return fs.statSync(path);
@@ -59,6 +59,203 @@ utils.isFile = (path) => {
 		return false;
 	}
 
+};
+
+/**
+ * @function writeDir
+ * @param {string} path - the path
+ * @returns {boolean} directory was written
+ */
+utils.writeDir = (path) => {
+
+	if (utils.isDir(path)) {
+		return false;
+	}
+
+	try {
+		fs.mkdirSync(path);
+		return true;
+	} catch (err) {
+		log.error(err);
+		return false;
+	}
+};
+
+/**
+ * @function writeFile
+ * @param {string} path - the path
+ * @param {string} fileData - data in file
+ * @returns {boolean} file was written
+ */
+utils.writeFile = (path, fileData) => {
+	try {
+		fs.writeFileSync(path, fileData);
+		return true;
+	} catch (err) {
+		log.error(err);
+		return false;
+	}
+};
+
+/**
+ *
+ * @method readDir
+ * @param {string} dir - path to directory
+ * @param {Array|undefined} ignoreFiles - ignore files
+ * @returns {Array} list of files and directories in given directory
+ * @public
+ */
+utils.readDir = (dir, ignoreFiles = []) => {
+	const results = [];
+	let list = [];
+
+	try {
+		list = fs.readdirSync(dir);
+	} catch (err) {
+		log.error(`Folder "${err.path}" not found!`);
+		return [];
+	}
+
+	list.map((file) => {
+		if (ignoreFiles.indexOf(file) < 0) {
+			results.push(file);
+		}
+		return true;
+	});
+	return results;
+};
+
+/**
+ *
+ * @method readFile
+ * @param {string} path - path to file
+ * @returns {string} file data
+ * @public
+ */
+utils.readFile = (path) => {
+	return fs.readFileSync(path, 'utf8');
+};
+
+/**
+ *
+ * @method removeFile
+ * @param {string} path - path to file
+ * @returns {boolean} file was removed
+ * @public
+ */
+utils.removeFile = (path) => {
+	try {
+		fs.unlinkSync(path);
+		return true;
+	} catch (err) {
+		log.error(`Cannot remove file "${err.path}"!`);
+		return false;
+	}
+};
+
+/**
+ *
+ * @method removeDir
+ * @param {string} path - path to directory
+ * @returns {boolean} file was removed
+ * @public
+ */
+utils.removeDir = (path) => {
+	try {
+		if (!utils.isDir(path)) {
+			return false;
+		}
+
+		fs.readdirSync(path).forEach((file) => {
+			const curPath = `${path}/${file}`;
+			if (utils.isDir(curPath)) {
+				// remove dir
+				utils.removeDir(curPath);
+			} else {
+				// delete file
+				utils.removeFile(curPath);
+			}
+		});
+		fs.rmdirSync(path);
+		return true;
+
+	} catch (err) {
+		return false;
+	}
+};
+
+/**
+ * Capitalizes the first letter of the given string.
+ *
+ * @method capitalize
+ * @param {string} str - the original string
+ * @returns {string} The capitalized string
+ */
+utils.capitalize = (str) => {
+	// Capitalize the first letter
+	return str
+		.substr(0, 1)
+		.toUpperCase()
+		.concat(str.substr(1));
+};
+
+/**
+ * Camelizes the given string.
+ *
+ * @method toCamel
+ * @param {string} str - the original string
+ * @returns {string} the camelized string
+ */
+utils.toCamel = (str) => {
+	return str.replace(/(\-[A-Za-z])/g, ($1) => {
+		return $1.toUpperCase().replace('-', '');
+	});
+};
+
+
+/**
+ *
+ * @method relativePath
+ * @param {string} rootPath - the root path which will be removed
+ * @param {string} path - the path
+ * @returns {string} the cleaned path
+ * @public
+ */
+utils.relativePath = (rootPath, path) => {
+
+	if (typeof path !== 'string') {
+		return '';
+	}
+
+	if (!rootPath) {
+		return path;
+	}
+
+	return path.replace(rootPath, '');
+};
+
+/**
+ *
+ * @method typeOf
+ * @param {*} value - the original value
+ * @returns {string} - returns typeof given value
+ * @public
+ */
+utils.typeOf = (value) => {
+
+	if (value === null) {
+		return 'null';
+	}
+
+	if (value === undefined) {
+		return 'undefined';
+	}
+
+	if (isNaN(value) && value.toString() === 'NaN') {
+		return 'NaN';
+	}
+
+	return (value instanceof Array) ? 'array' : typeof value;
 };
 
 module.exports = utils;
