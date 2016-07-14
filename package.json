@@ -1,6 +1,6 @@
 {
 	"name": "nms-core-utils",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"description": "Node mock server core utils",
 	"email": "simon.mollweide@web.de",
 	"author": "Simon Mollweide <simon.mollweide@web.de>",
