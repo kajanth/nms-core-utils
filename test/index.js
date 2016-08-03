@@ -3,6 +3,18 @@
 
 const assert = require('assert');
 const utils = require('../index.js');
+const testPaths = [
+	['/test', 'L3Rlc3Q='],
+	['/path/{placeholder}/sub', 'L3BhdGgve3BsYWNlaG9sZGVyfS9zdWI='],
+	[
+		'/path/{placeholder}/{super}/{long}/1,323,343/sub/directory',
+		'L3BhdGgve3BsYWNlaG9sZGVyfS97c3VwZXJ9L3tsb25nfS8xLDMyMywzNDMvc3ViL2RpcmVjdG9yeQ=='
+	],
+	[
+		'/path/{placeholder}/{super}/with.selector.html',
+		'L3BhdGgve3BsYWNlaG9sZGVyfS97c3VwZXJ9L3dpdGguc2VsZWN0b3IuaHRtbA=='
+	]
+];
 
 describe('forIn', () => {
 
@@ -218,6 +230,30 @@ describe('typeOf', () => {
 	it('typeOf NaN', (done) => {
 		assert.equal(utils.typeOf(NaN), 'NaN');
 		done();
+	});
+
+});
+
+describe('encodeNmsPath', () => {
+
+	testPaths.map(([decoded, encoded]) => {
+		it(`${decoded} => ${encoded}`, (done) => {
+			assert.equal(utils.encodeNmsPath(decoded), encoded);
+			done();
+		});
+		return true;
+	});
+
+});
+
+describe('decodeNmsPath', () => {
+
+	testPaths.map(([decoded, encoded]) => {
+		it(`${encoded} => ${decoded}`, (done) => {
+			assert.equal(utils.decodeNmsPath(encoded), decoded);
+			done();
+		});
+		return true;
 	});
 
 });
