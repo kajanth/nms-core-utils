@@ -129,11 +129,15 @@ utils.readDir = (dir, ignoreFiles = ['.DS_Store']) => {
  *
  * @method readFile
  * @param {string} path - path to file
- * @returns {string} file data
+ * @returns {string|undefined} file data
  * @public
  */
 utils.readFile = (path) => {
-	return fs.readFileSync(path, 'utf8');
+	try {
+		return fs.readFileSync(path, 'utf8');
+	} catch (err) {
+		return undefined;
+	}
 };
 
 /**
