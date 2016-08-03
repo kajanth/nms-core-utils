@@ -105,7 +105,7 @@ utils.writeFile = (path, fileData) => {
  * @returns {Array} list of files and directories in given directory
  * @public
  */
-utils.readDir = (dir, ignoreFiles = []) => {
+utils.readDir = (dir, ignoreFiles = ['.DS_Store']) => {
 	const results = [];
 	let list = [];
 
@@ -256,6 +256,28 @@ utils.typeOf = (value) => {
 	}
 
 	return (value instanceof Array) ? 'array' : typeof value;
+};
+
+/**
+ *
+ * @method encodeNmsPath
+ * @param {string} path - the decoded path
+ * @returns {string} - returns encoded path
+ * @public
+ */
+utils.encodeNmsPath = (path) => {
+	return new Buffer(path).toString('base64');
+};
+
+/**
+ *
+ * @method decodeNmsPath
+ * @param {string} encodedPath - the encoded path
+ * @returns {string} - returns path
+ * @public
+ */
+utils.decodeNmsPath = (encodedPath) => {
+	return new Buffer(encodedPath, 'base64').toString('ascii').replace(/\/\//g, '/');
 };
 
 module.exports = utils;
