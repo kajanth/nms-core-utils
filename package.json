@@ -13,7 +13,7 @@
 		"url": "https://github.com/smollweide/nms-core-utils/issues"
 	},
 	"scripts": {
-		"test": "./node_modules/mocha/bin/mocha ./test/index.js",
+		"test": "./node_modules/.bin/mocha ./test/index.js",
 		"posttest": "npm run lint",
 		"lint": "./node_modules/.bin/eslint ./test ./index.js"
 	},
@@ -26,10 +26,12 @@
 	"license": "MIT",
 	"dependencies": {
 		"chip": "0.0.5",
-		"extend": "^3.0.0"
+		"extend": "^3.0.0",
+		"hashids": "^1.1.0",
+		"string-hash": "^1.1.0"
 	},
 	"devDependencies": {
-		"@namics/eslint-config": "^0.2.0",
+		"@namics/eslint-config": "^1.0.0",
 		"mocha": "^2.4.5"
 	}
 }
