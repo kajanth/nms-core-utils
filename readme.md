@@ -1,7 +1,7 @@
 
 # nms-core-utils
 
-> File based Node API mock server
+> Node mock server core utils
 
 [![Build Status](https://img.shields.io/travis/smollweide/nms-core-utils/master.svg)](https://travis-ci.org/smollweide/nms-core-utils)
 [![Dependencies](https://img.shields.io/david/smollweide/nms-core-utils/master.svg)](https://david-dm.org/smollweide/nms-core-utils)
