@@ -236,9 +236,9 @@ describe('typeOf', () => {
 
 describe('encodeNmsPath', () => {
 
-	testPaths.map(([decoded, encoded]) => {
-		it(`${decoded} => ${encoded}`, (done) => {
-			assert.equal(utils.encodeNmsPath(decoded), encoded);
+	testPaths.map((item) => {
+		it(`${item[0]} => ${item[1]}`, (done) => {
+			assert.equal(utils.encodeNmsPath(item[0]), item[1]);
 			done();
 		});
 		return true;
@@ -248,9 +248,9 @@ describe('encodeNmsPath', () => {
 
 describe('decodeNmsPath', () => {
 
-	testPaths.map(([decoded, encoded]) => {
-		it(`${encoded} => ${decoded}`, (done) => {
-			assert.equal(utils.decodeNmsPath(encoded), decoded);
+	testPaths.map((item) => {
+		it(`${item[1]} => ${item[0]}`, (done) => {
+			assert.equal(utils.decodeNmsPath(item[1]), item[0]);
 			done();
 		});
 		return true;
