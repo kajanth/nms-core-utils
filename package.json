@@ -13,9 +13,7 @@
 		"url": "https://github.com/smollweide/nms-core-utils/issues"
 	},
 	"scripts": {
-		"preinstall": "npm i eslint -g",
 		"test": "./node_modules/.bin/mocha ./test/index.js",
-		"posttest": "npm run lint",
 		"lint": "./node_modules/.bin/eslint ./test ./index.js"
 	},
 	"main": "index.js",
