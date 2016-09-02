@@ -1,3 +1,5 @@
+'use strict';
+
 const fs = require('fs');
 const log = require('chip');
 const utils = {};
@@ -105,7 +107,10 @@ utils.writeFile = (path, fileData) => {
  * @returns {Array} list of files and directories in given directory
  * @public
  */
-utils.readDir = (dir, ignoreFiles = ['.DS_Store']) => {
+utils.readDir = (dir, ignoreFiles) => {
+
+	ignoreFiles = ignoreFiles || ['.DS_Store'];
+
 	const results = [];
 	let list = [];
 
