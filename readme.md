@@ -19,6 +19,24 @@ npm install nms-core-utils --save-dev
 const utils = require('nms-core-utils');
 ```
 
+## utils
+- forIn
+- getStats
+- isDir
+- isFile
+- writeDir
+- writeFile
+- readDir
+- readFile
+- removeFile
+- removeDir
+- capitalize
+- toCamel
+- relativePath
+- typeOf
+- encodeNmsPath
+- decodeNmsPath
+
 ## License
 [MIT License](./LICENSE)
 
