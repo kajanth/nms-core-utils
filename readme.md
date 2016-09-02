@@ -20,7 +20,7 @@ const utils = require('nms-core-utils');
 ```
 
 ## License
-[MIT License](https://github.com/smollweide/nms-core-utils/blob/master/LICENSE)
+[MIT License](./LICENSE)
 
 ## Changelog
-Please see the [CHANGELOG.md](https://github.com/smollweide/nms-core-utils/blob/master/CHANGELOG.md)
+Please see the [CHANGELOG](https://github.com/smollweide/nms-core-utils/releases)
