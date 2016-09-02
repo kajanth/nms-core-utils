@@ -22,7 +22,7 @@
 		"node": ">= 4.4.0"
 	},
 	"preferGlobal": false,
-	"private": true,
+	"private": false,
 	"license": "MIT",
 	"dependencies": {
 		"chip": "0.0.5"
